@@ -1,0 +1,14 @@
+POST http://localhost:8080/api/gincanas
+Content-Type: application/json
+
+{
+  "titulo": "Gincana por el Puerto",
+  "lugar": "Puerto de Sagunto",
+  "latitud": 39.6667,
+  "longitud": -0.2167,
+  "dificultad": "facil"
+}
+
+###
+
+GET http://localhost:8080/api/gincanas
