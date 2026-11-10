@@ -1,0 +1,121 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"5f048c67-8033-49e9-b271-ea1c065af6b1\" name=\"Changes\" comment=\"Estructura del Proyecto\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/example/LiveRoute/controller/GincanaController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/example/LiveRoute/model/Gincana.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/com/example/LiveRoute/repository/GincanaRepository.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;yaserr11&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/yaserr11/LiveRoute.git&quot;,\r\n    &quot;accountId&quot;: &quot;f6e8b1b8-caca-4b2d-8bbf-ad4080d26db0&quot;\r\n  }\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"McpProjectServerCommands\">\r\n    <commands />\r\n    <urls />\r\n  </component>\r\n  <component name=\"NextEditCompletionFeaturesState\">\r\n    <decayedCancelled>\r\n      <entry key=\"MS100\" value=\"1.0\" />\r\n      <entry key=\"MS500\" value=\"1.0\" />\r\n      <entry key=\"S2\" value=\"1.0\" />\r\n      <entry key=\"S5\" value=\"1.0000000674174945\" />\r\n      <entry key=\"S10\" value=\"1.000761368097313\" />\r\n      <entry key=\"S30\" value=\"1.393021589777748\" />\r\n      <entry key=\"S60\" value=\"2.8794999196855326\" />\r\n      <entry key=\"M2\" value=\"5.114077833473388\" />\r\n      <entry key=\"M5\" value=\"7.810280313296135\" />\r\n      <entry key=\"M10\" value=\"9.865543817091604\" />\r\n      <entry key=\"M15\" value=\"11.122991457662428\" />\r\n      <entry key=\"M30\" value=\"13.017194171620769\" />\r\n      <entry key=\"H1\" value=\"14.33351044311451\" />\r\n      <entry key=\"H2\" value=\"15.116849132406145\" />\r\n      <entry key=\"H4\" value=\"15.545085286650124\" />\r\n      <entry key=\"D1\" value=\"15.922250013712617\" />\r\n      <entry key=\"W1\" value=\"15.988844517726776\" />\r\n    </decayedCancelled>\r\n    <decayedSelected>\r\n      <entry key=\"MS100\" value=\"0.0\" />\r\n      <entry key=\"MS500\" value=\"0.0\" />\r\n      <entry key=\"S2\" value=\"0.0\" />\r\n      <entry key=\"S5\" value=\"0.0\" />\r\n      <entry key=\"S10\" value=\"0.0\" />\r\n      <entry key=\"S30\" value=\"0.0\" />\r\n      <entry key=\"S60\" value=\"0.0\" />\r\n      <entry key=\"M2\" value=\"0.0\" />\r\n      <entry key=\"M5\" value=\"0.0\" />\r\n      <entry key=\"M10\" value=\"0.0\" />\r\n      <entry key=\"M15\" value=\"0.0\" />\r\n      <entry key=\"M30\" value=\"0.0\" />\r\n      <entry key=\"H1\" value=\"0.0\" />\r\n      <entry key=\"H2\" value=\"0.0\" />\r\n      <entry key=\"H4\" value=\"0.0\" />\r\n      <entry key=\"D1\" value=\"0.0\" />\r\n      <entry key=\"W1\" value=\"0.0\" />\r\n    </decayedSelected>\r\n    <decayedShown>\r\n      <entry key=\"MS100\" value=\"0.2606164402102803\" />\r\n      <entry key=\"MS500\" value=\"0.7641882603825833\" />\r\n      <entry key=\"S2\" value=\"0.9349751977514554\" />\r\n      <entry key=\"S5\" value=\"0.9734643820207203\" />\r\n      <entry key=\"S10\" value=\"0.987399560350434\" />\r\n      <entry key=\"S30\" value=\"1.387833429291617\" />\r\n      <entry key=\"S60\" value=\"2.8756087178827667\" />\r\n      <entry key=\"M2\" value=\"5.111181584747958\" />\r\n      <entry key=\"M5\" value=\"7.808690840165353\" />\r\n      <entry key=\"M10\" value=\"9.86462011888532\" />\r\n      <entry key=\"M15\" value=\"11.122330815720543\" />\r\n      <entry key=\"M30\" value=\"13.016832619599267\" />\r\n      <entry key=\"H1\" value=\"14.3333193127642\" />\r\n      <entry key=\"H2\" value=\"15.11675054688577\" />\r\n      <entry key=\"H4\" value=\"15.545035175701768\" />\r\n      <entry key=\"D1\" value=\"15.922241542408877\" />\r\n      <entry key=\"W1\" value=\"15.988843304534829\" />\r\n    </decayedShown>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4,\r\n  &quot;fromUser&quot;: false\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"3LaqlnEQgFqCcNtRZUwWWDtBif0\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RunOnceActivity.MCP Project settings loaded\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"RunOnceActivity.typescript.service.memoryLimit.init\": \"true\",\r\n    \"Spring Boot.LiveRouteApplication.executor\": \"Run\",\r\n    \"codeWithMe.voiceChat.enabledByDefault\": \"false\",\r\n    \"git-widget-placeholder\": \"feature/gincana-entity\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"onboarding.tips.debug.path\": \"C:/Users/yassir/IdeaProjects/LiveRoute/LiveRoute/src/Main.java\",\r\n    \"settings.editor.selected.configurable\": \"org.jetbrains.plugins.github.ui.GithubSettingsConfigurable\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"5f048c67-8033-49e9-b271-ea1c065af6b1\" name=\"Changes\" comment=\"\" />\r\n      <created>1793702682105</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1793702682105</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Primero commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1793702931967</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1793702931967</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Estructura del Proyecto\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1793704130580</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1793704130581</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"OPEN_GENERIC_TABS\">\r\n      <map>\r\n        <entry key=\"acd09b5c-3aca-458a-bbe1-dc37eb43af8d\" value=\"TOOL_WINDOW\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n        <entry key=\"acd09b5c-3aca-458a-bbe1-dc37eb43af8d\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"master\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Primero commit\" />\r\n    <MESSAGE value=\"Estructura del Proyecto\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Estructura del Proyecto\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src/Main.java</url>\r\n          <line>10</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 09f161a4730faff22873aeaace5c4b7ff098f83c)
++++ b/.idea/workspace.xml	(date 1794308815871)
+@@ -4,12 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="5f048c67-8033-49e9-b271-ea1c065af6b1" name="Changes" comment="Estructura del Proyecto">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/LiveRoute/controller/GincanaController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/LiveRoute/model/Gincana.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/LiveRoute/repository/GincanaRepository.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-    </list>
++    <list default="true" id="5f048c67-8033-49e9-b271-ea1c065af6b1" name="Changes" comment="Estructura del Proyecto" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -23,6 +18,11 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="feature/gincana-entity" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="GitHubPullRequestSearchHistory">{
+@@ -53,20 +53,20 @@
+       <entry key="MS100" value="1.0" />
+       <entry key="MS500" value="1.0" />
+       <entry key="S2" value="1.0" />
+-      <entry key="S5" value="1.0000000674174945" />
+-      <entry key="S10" value="1.000761368097313" />
+-      <entry key="S30" value="1.393021589777748" />
+-      <entry key="S60" value="2.8794999196855326" />
+-      <entry key="M2" value="5.114077833473388" />
+-      <entry key="M5" value="7.810280313296135" />
+-      <entry key="M10" value="9.865543817091604" />
+-      <entry key="M15" value="11.122991457662428" />
+-      <entry key="M30" value="13.017194171620769" />
+-      <entry key="H1" value="14.33351044311451" />
+-      <entry key="H2" value="15.116849132406145" />
+-      <entry key="H4" value="15.545085286650124" />
+-      <entry key="D1" value="15.922250013712617" />
+-      <entry key="W1" value="15.988844517726776" />
++      <entry key="S5" value="1.0" />
++      <entry key="S10" value="1.0" />
++      <entry key="S30" value="1.0000001023147598" />
++      <entry key="S60" value="1.0007803820863734" />
++      <entry key="M2" value="1.084190374990469" />
++      <entry key="M5" value="2.5110006991557574" />
++      <entry key="M10" value="5.339303752134813" />
++      <entry key="M15" value="7.43310961878799" />
++      <entry key="M30" value="10.89958655366856" />
++      <entry key="H1" value="13.499781002806971" />
++      <entry key="H2" value="15.116797900865537" />
++      <entry key="H4" value="16.02209722121855" />
++      <entry key="D1" value="16.831692606571615" />
++      <entry key="W1" value="16.975821860400067" />
+     </decayedCancelled>
+     <decayedSelected>
+       <entry key="MS100" value="0.0" />
+@@ -88,23 +88,23 @@
+       <entry key="W1" value="0.0" />
+     </decayedSelected>
+     <decayedShown>
+-      <entry key="MS100" value="0.2606164402102803" />
+-      <entry key="MS500" value="0.7641882603825833" />
+-      <entry key="S2" value="0.9349751977514554" />
+-      <entry key="S5" value="0.9734643820207203" />
+-      <entry key="S10" value="0.987399560350434" />
+-      <entry key="S30" value="1.387833429291617" />
+-      <entry key="S60" value="2.8756087178827667" />
+-      <entry key="M2" value="5.111181584747958" />
+-      <entry key="M5" value="7.808690840165353" />
+-      <entry key="M10" value="9.86462011888532" />
+-      <entry key="M15" value="11.122330815720543" />
+-      <entry key="M30" value="13.016832619599267" />
+-      <entry key="H1" value="14.3333193127642" />
+-      <entry key="H2" value="15.11675054688577" />
+-      <entry key="H4" value="15.545035175701768" />
+-      <entry key="D1" value="15.922241542408877" />
+-      <entry key="W1" value="15.988843304534829" />
++      <entry key="MS100" value="1.693068652447273E-5" />
++      <entry key="MS500" value="0.11110533514582129" />
++      <entry key="S2" value="0.5773427658443463" />
++      <entry key="S5" value="0.8027373887159535" />
++      <entry key="S10" value="0.8959561310220235" />
++      <entry key="S30" value="0.964041273644936" />
++      <entry key="S60" value="0.9826353107023443" />
++      <entry key="M2" value="1.0750291588860033" />
++      <entry key="M5" value="2.507037764633385" />
++      <entry key="M10" value="5.337068080266122" />
++      <entry key="M15" value="7.431507564508663" />
++      <entry key="M30" value="10.89870142469555" />
++      <entry key="H1" value="13.499309193603276" />
++      <entry key="H2" value="15.11655326023557" />
++      <entry key="H4" value="16.02197250475344" />
++      <entry key="D1" value="16.831671467808206" />
++      <entry key="W1" value="16.975818831666345" />
+     </decayedShown>
+   </component>
+   <component name="ProjectColorInfo">{
+@@ -125,7 +125,7 @@
+     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+     "Spring Boot.LiveRouteApplication.executor": "Run",
+     "codeWithMe.voiceChat.enabledByDefault": "false",
+-    "git-widget-placeholder": "feature/gincana-entity",
++    "git-widget-placeholder": "master",
+     "kotlin-language-version-configured": "true",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
