@@ -12,3 +12,30 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/gincanas
+###
+
+POST http://localhost:8080/api/gincanas/1/retos
+Content-Type: application/json
+
+{
+  "orden": 1,
+  "pista": "Busca la torre más alta del puerto",
+  "respuesta": "Alto Horno",
+  "latitud": 39.6640,
+  "longitud": -0.2210
+}
+
+###
+
+# Devuelve RetoDTO: sin "respuesta" ni la gincana
+GET http://localhost:8080/api/gincanas/1/retos
+
+###
+
+# Ignora mayúsculas, espacios y tildes: "altohorno" es correcto
+POST http://localhost:8080/api/gincanas/1/retos/1/comprobar
+Content-Type: application/json
+
+{
+  "respuesta": "  ALTÓ horno "
+}
