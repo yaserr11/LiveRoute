@@ -2,6 +2,8 @@ package com.example.LiveRoute.cliente;
 
 import com.example.LiveRoute.util.Texto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -11,32 +13,64 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Busca puntos de interés en OpenStreetMap usando la API de Overpass (gratis, sin API key).
+ * Prueba los servidores de "overpass.urls" en orden: si uno falla o tarda demasiado, pasa al
+ * siguiente. Solo lanza ServicioMapasException si fallan todos.
+ * <p>
+ * Un servidor que acaba de fallar queda "en pausa" unos minutos: se prueba el último, para que
+ * las siguientes peticiones no esperen otra vez su timeout. Se sigue usando como último recurso.
  */
 @Component
 public class OverpassClient implements ProveedorLugares {
 
+    private static final Logger log = LoggerFactory.getLogger(OverpassClient.class);
     private static final int MAX_RESULTADOS = 200;
+    static final Duration PAUSA_TRAS_FALLO = Duration.ofMinutes(2);
 
     private final RestClient restClient;
-    private final String url;
+    private final List<String> urls;
+    private final Clock reloj;
+    private final Map<String, Instant> enPausaHasta = new ConcurrentHashMap<>();
 
     @Autowired
-    public OverpassClient(@Value("${overpass.url}") String url) {
-        this(ClientesHttp.builderConTimeouts(), url);
+    public OverpassClient(@Value("${overpass.urls}") List<String> urls) {
+        this(ClientesHttp.builderConTimeouts(), urls, Clock.systemUTC());
     }
 
-    /** Para tests: permite pasar un builder conectado a un servidor simulado. */
-    OverpassClient(RestClient.Builder builder, String url) {
+    /** Para tests: permite pasar un builder conectado a un servidor simulado y un reloj fijo. */
+    OverpassClient(RestClient.Builder builder, List<String> urls, Clock reloj) {
+        List<String> limpias = urls == null ? List.of()
+                : urls.stream().map(String::strip).filter(u -> !u.isEmpty()).toList();
+        if (limpias.isEmpty()) {
+            throw new IllegalArgumentException("overpass.urls debe tener al menos un servidor");
+        }
         this.restClient = ClientesHttp.construir(builder);
-        this.url = url;
+        this.urls = limpias;
+        this.reloj = reloj;
+    }
+
+    /** Orden configurado, pero con los servidores en pausa al final. */
+    List<String> ordenDeServidores() {
+        Instant ahora = reloj.instant();
+        List<String> disponibles = new ArrayList<>();
+        List<String> enPausa = new ArrayList<>();
+        for (String url : urls) {
+            Instant hasta = enPausaHasta.get(url);
+            (hasta != null && ahora.isBefore(hasta) ? enPausa : disponibles).add(url);
+        }
+        disponibles.addAll(enPausa);
+        return disponibles;
     }
 
     @Override
@@ -44,21 +78,64 @@ public class OverpassClient implements ProveedorLugares {
         MultiValueMap<String, String> formulario = new LinkedMultiValueMap<>();
         formulario.add("data", consulta(latitud, longitud, radioMetros));
 
-        RespuestaOverpass respuesta;
-        try {
-            respuesta = restClient.post()
-                    .uri(url)
-                    .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                    .body(formulario)
-                    .retrieve()
-                    .body(RespuestaOverpass.class);
-        } catch (RestClientException e) {
-            throw new ServicioMapasException(e);
+        RestClientException ultimoFallo = null;
+        List<RestClientException> fallos = new ArrayList<>();
+        List<String> orden = ordenDeServidores();
+        for (String url : orden) {
+            long inicio = System.nanoTime();
+            try {
+                List<LugarCercano> lugares = consultarServidor(url, formulario);
+                enPausaHasta.remove(url);
+                log.info("Overpass respondió desde {} en {} ms ({} lugares)",
+                        url, (System.nanoTime() - inicio) / 1_000_000, lugares.size());
+                return lugares;
+            } catch (RestClientException e) {
+                enPausaHasta.put(url, reloj.instant().plus(PAUSA_TRAS_FALLO));
+                log.warn("Overpass falló en {} tras {} ms: {}",
+                        url, (System.nanoTime() - inicio) / 1_000_000, primeraLinea(e.getMessage()));
+                fallos.add(e);
+                ultimoFallo = e;
+            }
         }
-        if (respuesta == null || respuesta.elements() == null) {
+        ServicioMapasException error = new ServicioMapasException(ultimoFallo);
+        fallos.stream().filter(f -> f != error.getCause()).forEach(error::addSuppressed);
+        log.error("Fallaron los {} servidores de Overpass", orden.size());
+        throw error;
+    }
+
+    private List<LugarCercano> consultarServidor(String url, MultiValueMap<String, String> formulario) {
+        RespuestaOverpass respuesta = restClient.post()
+                .uri(url)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .body(formulario)
+                .retrieve()
+                .body(RespuestaOverpass.class);
+        if (respuesta == null) {
             return List.of();
         }
-        return convertir(respuesta.elements());
+        // Overpass a veces responde 200 con un resultado a medias y un aviso
+        // ("runtime error: Query timed out..."). Eso cuenta como fallo: probamos otro servidor.
+        if (respuesta.remark() != null && respuesta.remark().contains("error")) {
+            throw new RespuestaIncompletaException(respuesta.remark());
+        }
+        return respuesta.elements() == null ? List.of() : convertir(respuesta.elements());
+    }
+
+    /** Los errores de Overpass traen páginas de texto largas; en el log basta la primera línea. */
+    private static String primeraLinea(String mensaje) {
+        if (mensaje == null) {
+            return "";
+        }
+        // Spring escribe los saltos de línea del cuerpo de error como "<EOL>".
+        String linea = mensaje.split("<EOL>|\\R", 2)[0];
+        return linea.length() > 200 ? linea.substring(0, 200) + "..." : linea;
+    }
+
+    /** El servidor respondió, pero con un resultado incompleto. */
+    static class RespuestaIncompletaException extends RestClientException {
+        RespuestaIncompletaException(String aviso) {
+            super("Respuesta incompleta de Overpass: " + aviso);
+        }
     }
 
     /**
@@ -101,7 +178,7 @@ public class OverpassClient implements ProveedorLugares {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    record RespuestaOverpass(List<Elemento> elements) {
+    record RespuestaOverpass(List<Elemento> elements, String remark) {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
