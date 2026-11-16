@@ -14,7 +14,8 @@ final class ClientesHttp {
 
     static final String USER_AGENT = "LiveRoute/1.0";
     static final Duration TIMEOUT_CONEXION = Duration.ofSeconds(5);
-    static final Duration TIMEOUT_LECTURA = Duration.ofSeconds(20);
+    /** Overpass puede tardar bastante en consultas grandes; su timeout propio es de 25 s. */
+    static final Duration TIMEOUT_LECTURA = Duration.ofSeconds(30);
 
     private ClientesHttp() {
     }

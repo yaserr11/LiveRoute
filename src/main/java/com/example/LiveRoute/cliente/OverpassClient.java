@@ -67,7 +67,7 @@ public class OverpassClient implements ProveedorLugares {
      */
     static String consulta(double latitud, double longitud, int radioMetros) {
         String alrededor = "(around:" + radioMetros + "," + latitud + "," + longitud + ")";
-        return "[out:json][timeout:15];\n"
+        return "[out:json][timeout:25];\n"
                 + "(\n"
                 + "  nwr" + alrededor + "[\"name\"][\"historic\"];\n"
                 + "  nwr" + alrededor + "[\"name\"][\"tourism\"~\"^(attraction|viewpoint|artwork|museum)$\"];\n"
