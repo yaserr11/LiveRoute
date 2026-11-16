@@ -30,3 +30,6 @@ bin/
 .DS_Store
 
 application-local.properties
+### Build y IDE ###
+target/
+.idea/
