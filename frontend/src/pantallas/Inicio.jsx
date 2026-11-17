@@ -72,7 +72,7 @@ export default function Inicio() {
           type="button"
           className="boton boton--primario boton--bloque"
           disabled={!puedeContinuar}
-          onClick={() => navigate('/generar', { state: { zona } })}
+          onClick={() => navigate('/generar', { state: { zona, lugares: vista.lugares } })}
         >
           Continuar
         </button>
