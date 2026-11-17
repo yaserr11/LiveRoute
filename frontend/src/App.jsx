@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import BarraNavegacion from './components/BarraNavegacion'
+import Inicio from './pantallas/Inicio'
 
 function Proximamente({ titulo }) {
   return (
@@ -14,7 +15,7 @@ export default function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Proximamente titulo="Inicio" />} />
+        <Route path="/" element={<Inicio />} />
         <Route path="/generar" element={<Proximamente titulo="Generar" />} />
         <Route path="/jugar/:id" element={<Proximamente titulo="Jugar" />} />
         <Route path="/gincanas" element={<Proximamente titulo="Mis gincanas" />} />
