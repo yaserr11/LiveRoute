@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-LiveRoute is a Spring Boot REST backend for location-based scavenger hunts ("gincanas"). A `Gincana` is a hunt tied to a place and coordinates; it owns an ordered list of `Reto` (challenges), each with a clue (`pista`), answer (`respuesta`), and its own GPS point. Domain names, endpoints, and error messages are in Spanish — keep new code consistent with that.
+LiveRoute is a Spring Boot REST backend (plus a React web front end in `frontend/`) for location-based scavenger hunts ("gincanas"). A `Gincana` is a hunt tied to a place and coordinates; it owns an ordered list of `Reto` (challenges), each with a clue (`pista`), answer (`respuesta`), and its own GPS point. Domain names, endpoints, and error messages are in Spanish — keep new code consistent with that.
 
-Stack: Spring Boot 4.1.2, Java 25, Maven (wrapper included), Spring Data JPA/Hibernate, MySQL.
+Stack: Spring Boot 4.1.2, Java 25, Maven (wrapper included), Spring Data JPA/Hibernate, MySQL. Front end: React 19 + Vite 8 (JavaScript), react-leaflet 5, react-router-dom 7, Node 24.
 
 ## Commands
 
@@ -20,7 +20,16 @@ Use the Maven wrapper (`./mvnw` in Git Bash, `mvnw.cmd` in PowerShell):
 ./mvnw test -Dtest=LiveRouteApplicationTests#contextLoads # single test method
 ```
 
-There is no linter configured. `requests.http` contains sample requests runnable from IntelliJ's HTTP client.
+Front end (from `frontend/`, needs the backend running):
+
+```bash
+cp .env.example .env    # first time only; VITE_API_URL points at the backend
+npm install             # first time / after dependency changes
+npm run dev             # http://localhost:5173 (strictPort: CORS only allows this origin)
+npm run build           # production build into frontend/dist — use it as the front end's "compile check"
+```
+
+There is no linter configured (backend or front end) and no front-end tests. `requests.http` contains sample requests runnable from IntelliJ's HTTP client.
 
 ## Database setup
 
@@ -54,8 +63,25 @@ Layered: `controller` → `service` → `repository` → MySQL, with request/res
 ### Errors
 - `controller/ManejadorErrores` (`@RestControllerAdvice`) turns every handled error into `{"error": "<mensaje>"}`: validation/bad JSON/bad or missing params → 400 (multiple messages sorted and joined with ". "), `ResponseStatusException` → its status + reason, `ServicioMapasException` → 502 "Servicio de mapas no disponible" (logged at WARN with the cause).
 
+### CORS
+- `config/CorsConfig` allows `/api/**` (GET, POST, `Content-Type` header) only from `liveroute.cors.origenes` in `application.properties` (comma-separated, default `http://localhost:5173`). Add origins there (e.g. the future mobile app) instead of touching code; override at run time with `--liveroute.cors.origenes=<a>,<b>`. `CorsConfigTest` checks allowed/preflight/rejected origins.
+
+## Front end (`frontend/`)
+
+Mobile-first web app, UI text in Spanish, light/dark via `prefers-color-scheme`, all styles in `src/index.css` (CSS variables, BEM-ish Spanish class names, no UI framework).
+
+- `src/api/config.js` is the **only** place that reads `VITE_API_URL` (from `.env`, git-ignored; `.env.example` is tracked). `src/api/cliente.js` has every API call; it throws `Error(<backend "error" message>)` with `.status`, or a "No se puede conectar con el servidor" message on network failure — screens show `e.message` as-is.
+- Folders: `pantallas/` (one per route), `components/` (small presentational pieces), `hooks/` (`useGeolocalizacion`, `usePosicionEnVivo`, `useDebounce`), `util/` (`formato`, `progreso`).
+- Routes (`App.jsx`, `BrowserRouter`), with a bottom `BarraNavegacion`:
+  - `/` **Inicio**: geolocation (fallback Puerto de Sagunto 39.6603, -0.2386), draggable marker / tap to move, radius slider 200–3000 m drawn as a circle. `previsualizar` is called 600 ms after the last change (`useDebounce`), with `AbortController` cancelling stale requests. The zone object is `useMemo`'d — a new object each render would restart the debounce forever. "Continuar" passes `{zona, lugares}` to Generar via router state.
+  - `/generar` **Generar**: numeroRetos 1–10, dificultad. Shows a spinner while `POST /generar` runs (can take 30 s+ when the main Overpass server times out), then `navigate('/jugar/{id}', {replace: true, state: {gincana}})`.
+  - `/jugar/:id` **Jugar**: retos from `GET .../retos`. The gincana (title and start point) comes from router state, or else is found in `GET /api/gincanas` (there is no GET-by-id). The current reto index is stored in `localStorage` key `liveroute.progreso.{id}` (`util/progreso.js`, all access in try/catch). `TarjetaReto` is keyed by reto id so its state resets per reto. Shows `PantallaFinal` when the index ≥ number of retos.
+  - `/gincanas` **Mis gincanas**: newest first. "Jugar" clears that gincana's progress (replay starts at reto 1).
+- **Never reveal answers in the UI.** The API never sends `respuesta` to the player. `MapaJuego` only draws the player's live position and the *previous* point (start point for reto 1, otherwise the solved reto) — never the current reto's coordinates, which would give the place away. A "warmer/colder" distance hint is a possible future optional feature; it should be computed so the target position is still not exposed in the UI.
+- Map tiles: `https://tile.openstreetmap.org/{z}/{x}/{y}.png` (`CAPA_OSM` in `MapaZona.jsx`). Markers are CSS `divIcon`s (`components/iconosMapa.js`) because Leaflet's default image icons don't resolve under Vite.
+
 ## Repo notes
 
-`target/`, `.idea/` and `application-local.properties` are git-ignored and no longer tracked. The DB password from the old `application-local.properties` remains in earlier commits.
+`target/`, `.idea/`, `application-local.properties`, `frontend/node_modules`, `frontend/dist` and `frontend/.env` are git-ignored and no longer tracked. The DB password from the old `application-local.properties` remains in earlier commits.
 
 Overpass and Nominatim are free public services with rate limits (Nominatim ~1 req/s) and occasional outages; the app should debounce `previsualizar` while the player changes the radius. To try different Overpass servers without editing the file: `./mvnw spring-boot:run "-Dspring-boot.run.arguments=--overpass.urls=<url1>,<url2>"`. Add `--server.port=8081` if the app is already running from IntelliJ on 8080.
