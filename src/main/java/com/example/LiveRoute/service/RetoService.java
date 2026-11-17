@@ -5,13 +5,12 @@ import com.example.LiveRoute.model.Gincana;
 import com.example.LiveRoute.model.Reto;
 import com.example.LiveRoute.repository.GincanaRepository;
 import com.example.LiveRoute.repository.RetoRepository;
+import com.example.LiveRoute.util.Texto;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.text.Normalizer;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 public class RetoService {
@@ -46,15 +45,7 @@ public class RetoService {
         if (reto.getRespuesta() == null) {
             return false;
         }
-        return normalizar(respuesta).equals(normalizar(reto.getRespuesta()));
-    }
-
-    /**
-     * Quita tildes, espacios y mayúsculas: "Plaza Málaga" -> "plazamalaga".
-     */
-    static String normalizar(String texto) {
-        String sinTildes = Normalizer.normalize(texto, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
-        return sinTildes.replaceAll("\\s+", "").toLowerCase(Locale.ROOT);
+        return Texto.normalizar(respuesta).equals(Texto.normalizar(reto.getRespuesta()));
     }
 
     private Gincana buscarGincana(Long gincanaId) {

@@ -39,3 +39,34 @@ Content-Type: application/json
 {
   "respuesta": "  ALTÓ horno "
 }
+
+###
+
+# Cuántos lugares hay en la zona (no guarda nada). radioMetros: 200-3000, por defecto 1000
+GET http://localhost:8080/api/gincanas/zona/previsualizar?latitud=39.6667&longitud=-0.2167&radioMetros=1000
+
+###
+
+# Genera una gincana con lugares reales de OpenStreetMap. Solo latitud y longitud son obligatorias.
+POST http://localhost:8080/api/gincanas/generar
+Content-Type: application/json
+
+{
+  "latitud": 39.6667,
+  "longitud": -0.2167,
+  "radioMetros": 1000,
+  "numeroRetos": 5,
+  "dificultad": "facil"
+}
+
+###
+
+# Error 400: radio demasiado pequeño
+POST http://localhost:8080/api/gincanas/generar
+Content-Type: application/json
+
+{
+  "latitud": 39.6667,
+  "longitud": -0.2167,
+  "radioMetros": 50
+}
