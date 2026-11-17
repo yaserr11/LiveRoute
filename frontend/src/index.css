@@ -541,3 +541,109 @@ input[type='range']::-moz-range-thumb {
   flex-wrap: wrap;
   gap: 8px;
 }
+
+/* ---------- Pantalla de juego ---------- */
+.pantalla--juego {
+  padding-top: 12px;
+  gap: 12px;
+  overflow-y: auto;
+}
+
+.progreso {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progreso__fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.progreso__titulo {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-suave);
+}
+
+.progreso__barra {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-borde);
+  overflow: hidden;
+}
+
+.progreso__barra span {
+  display: block;
+  height: 100%;
+  background: var(--color-primario);
+  transition: width 0.4s ease;
+}
+
+.juego__mapa {
+  position: relative;
+  flex: 1;
+  min-height: 140px;
+  border-radius: var(--radio);
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+}
+
+.mapa-juego {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.tarjeta-reto {
+  flex-shrink: 0;
+}
+
+.tarjeta-reto__pista {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.campo input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: var(--radio-pequeno);
+  border: 2px solid var(--color-borde);
+  background: var(--color-fondo);
+  font-size: 1rem;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--color-primario);
+}
+
+.campo input[aria-invalid='true'] {
+  border-color: var(--color-error);
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.pantalla-final__trofeo {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
+.pie--estrecho {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 360px;
+}
