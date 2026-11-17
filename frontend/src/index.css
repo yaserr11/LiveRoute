@@ -647,3 +647,69 @@ input[type='range']::-moz-range-thumb {
   width: 100%;
   max-width: 360px;
 }
+
+/* ---------- Mis gincanas ---------- */
+.lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tarjeta-gincana {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tarjeta-gincana__texto {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tarjeta-gincana__texto h2,
+.tarjeta-gincana__texto > .texto-suave {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tarjeta-gincana__datos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.insignia {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: var(--color-primario-claro);
+  color: var(--color-primario);
+}
+
+.insignia--facil {
+  background: var(--color-exito-fondo);
+  color: var(--color-exito);
+}
+
+.insignia--dificil {
+  background: var(--color-error-fondo);
+  color: var(--color-error);
+}
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0;
+  text-align: center;
+}
